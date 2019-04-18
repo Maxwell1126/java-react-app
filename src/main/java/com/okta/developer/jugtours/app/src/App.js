@@ -8,18 +8,12 @@ class App extends Component {
     groups: []
   };
 
-  // async componentDidMount() {
-  //   const response = await fetch('/api/groups');
-  //   const body = await response.text();
-
-  //   this.setState({ groups: body, isLoading: false });
-  // }
-  componentDidMount() {
-  fetch('/api/groups')
-  // .then(res => res.json()) // comment this out for now
-  .then(res => res.text())          // convert to plain text
-  .then(text => console.log(text)) 
+  async componentDidMount() {
+    const response = await fetch('/api/groups');
+    const body = await response.json();
+    this.setState({ groups: body, isLoading: false });
   }
+
   render() {
     const {groups, isLoading} = this.state;
 
