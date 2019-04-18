@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -9,9 +10,14 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('/api/groups');
-    const body = await response.json();
-    this.setState({ groups: body, isLoading: false });
+    axios.get('/api/groups').then(response => {
+      console.log(response.data);
+    this.setState({ groups: response.data, isLoading: false });  
+    })
+    // const response = await fetch('/api/groups');
+    // // console.log(response.json());
+    // const body = await response.json();
+    // this.setState({ groups: body, isLoading: false });
   }
 
   render() {
